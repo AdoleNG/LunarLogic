@@ -22,7 +22,7 @@
         .header {
             width: 100%;
             max-width: 480px;
-            background: #0284c7; /* Bright friendly sky blue */
+            background: #0284c7;
             color: white;
             padding: 22px;
             border-radius: 20px;
@@ -61,11 +61,24 @@
             margin-bottom: 30px;
         }
 
+        .hero-image-container {
+            margin-bottom: 20px;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            border: 3px solid #e0f2fe;
+        }
+
         .container p {
             font-size: 16px;
             color: #475569;
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 600;
         }
 
@@ -93,7 +106,7 @@
         }
 
         .btn-create {
-            background-color: #10b981; /* Cheerful Mint Green */
+            background-color: #10b981;
             color: #ffffff;
         }
 
@@ -104,7 +117,7 @@
         }
 
         .btn-parent {
-            background-color: #0284c7; /* Sky Blue */
+            background-color: #0284c7;
             color: #ffffff;
         }
 
@@ -115,7 +128,7 @@
         }
 
         .btn-child {
-            background-color: #f59e0b; /* Bright Star Yellow/Orange */
+            background-color: #f59e0b;
             color: #ffffff;
         }
 
@@ -125,24 +138,20 @@
             box-shadow: 0 6px 12px rgba(245, 158, 11, 0.3);
         }
 
-        /* Mobile responsiveness adjustments */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
-
             .container {
                 padding: 20px;
                 border-radius: 16px;
                 border-width: 2px;
             }
-
             .header {
                 font-size: 26px;
                 padding: 16px;
                 margin-top: 10px;
             }
-
             .subheader {
                 font-size: 15px;
             }
@@ -155,6 +164,11 @@
     <div class="subheader">Your stellar portal for family missions and task tracking!</div>
 
     <div class="container">
+        <!-- Hero Illustration -->
+        <div class="hero-image-container">
+            <img src="{{ url_for('static', filename='chores-hero.png') }}" alt="Kids performing household chores">
+        </div>
+
         <p>Choose an option below to get started:</p>
         
         <div class="button-row">
@@ -162,12 +176,7 @@
             <a href="/parent-login" class="btn btn-parent">👑 Parent Login</a>
             <a href="/child-login" class="btn btn-child">⭐ Kid Explorer Login</a>
         </div>
-
-        <div class="hero-image-container" style="text-align: center; margin-bottom: 20px;">
-    <img src="{{ url_for('static', filename='chores-hero.png') }}" alt="Kids doing chores" style="width: 100%; max-width: 350px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-</div>
     </div>
 
 </body>
 </html>
-
