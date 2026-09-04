@@ -156,10 +156,15 @@ def parent_tasks():
     parent_username = request.args.get('username')
     parent_data = db["parents"].get(parent_username, {})
     
-    # Filter tasks created exclusively by this parent
+    # Safely get tasks, defaulting to an empty list if it doesn't exist
     all_tasks = parent_data.get("tasks", [])
-    parent_tasks_list = [t for t in all_tasks if isinstance(t, dict) and t.get("created_by") == parent_username]
     
+    # Filter tasks created exclusively by this parent
+    parent_tasks_list = []
+    for t in all_tasks:
+        if isinstance(t, dict) and t.get("created_by") == parent_username:
+            parent_tasks_list.append(t)
+            
     return render_template('parent_tasks.html', 
                            parent_username=parent_username, 
                            tasks=parent_tasks_list)
