@@ -1,0 +1,141 @@
+{
+    "parents": {
+        "Adole": {
+            "name": "Adole",
+            "password": "Adole",
+            "children": [
+                "Keera",
+                "Gentle girl"
+            ]
+        },
+        "Esther": {
+            "name": "Esther",
+            "password": "Esther",
+            "children": [
+                "Isabella",
+                "Asher",
+                "Preston",
+                "Beatrice",
+                "Ben",
+                "Amanda"
+            ]
+        }
+    },
+    "children": {
+        "Keera": {
+            "name": "Keera",
+            "password": "Keera",
+            "parent": "Adole",
+            "points": 0,
+            "tasks": [
+                {
+                    "name": "cook ona",
+                    "completed": false
+                },
+                {
+                    "name": "Cook jollof rice and stew",
+                    "completed": false
+                },
+                {
+                    "name": "watch tv",
+                    "completed": false
+                }
+            ]
+        },
+        "Gentle girl": {
+            "name": "Gentle girl",
+            "password": "Gentle",
+            "parent": "Adole",
+            "points": 0,
+            "tasks": [
+                {
+                    "name": "cook ona",
+                    "completed": false
+                }
+            ]
+        },
+        "Isabella": {
+            "name": "Isabella",
+            "password": "Esther",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": [
+                {
+                    "name": "Cook jollof rice and stew",
+                    "completed": false
+                }
+            ]
+        },
+        "Asher": {
+            "name": "Asher",
+            "password": "Asher",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": [
+                {
+                    "name": "Cook jollof rice and stew",
+                    "completed": false
+                }
+            ]
+        },
+        "Preston": {
+            "name": "Preston",
+            "password": "Esther",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": [
+                {
+                    "name": "Play violn",
+                    "completed": true
+                }
+            ]
+        },
+        "Beatrice": {
+            "name": "Beatrice",
+            "password": "Esther",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": []
+        },
+        "Ben": {
+            "name": "Ben",
+            "password": "Esther",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": []
+        },
+        "Amanda": {
+            "name": "Amanda",
+            "password": "Esther",
+            "parent": "Esther",
+            "points": 0,
+            "tasks": []
+        }
+    },
+    "tasks": [
+        {
+            "name": "Clean chairs"
+        },
+        {
+            "name": "play piano"
+        },
+        {
+            "name": "cook ona"
+        },
+        {
+            "name": "Cook jollof rice and stew"
+        },
+        {
+            "name": "watch tv"
+        },
+        {
+            "name": "Eat"
+        },
+        {
+            "name": "Eat"
+        },
+        {
+            "name": "Play violn"
+        }
+    ]
+}

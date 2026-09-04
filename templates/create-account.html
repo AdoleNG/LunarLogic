@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Lunar Logic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 450px;
+            background: #0284c7;
+            color: white;
+            padding: 18px;
+            border-radius: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            box-sizing: border-box;
+            border: 4px solid #bae6fd;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #0284c7;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 15px;
+            display: block;
+            margin-top: 15px;
+            text-align: left;
+            color: #334155;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            margin-top: 6px;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 15px;
+            background-color: #f8fafc;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #0284c7;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .btn-back:hover {
+            background: #cbd5e1;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">🚀 Lunar Logic</div>
+
+<div class="container">
+    <h2>Create Account</h2>
+    <p>Join the stellar mission and set up your space profile!</p>
+
+    <form action="/create-account" method="POST">
+        
+        <label for="role">I am a:</label>
+        <select id="role" name="role" onchange="toggleParentField()" required>
+            <option value="" disabled selected>Select your account type</option>
+            <option value="parent">👑 Parent</option>
+            <option value="child">⭐ Kid Explorer (Child)</option>
+        </select>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+        <!-- Parent Username Field (Hidden by default, shown if Child is selected) -->
+        <div id="parent-field-container" class="hidden">
+            <label for="parent_username">Parent's Username:</label>
+            <input type="text" id="parent_username" name="parent_username" placeholder="Enter your parent's username">
+        </div>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Create a secure password" required>
+
+        <div class="btn-container">
+            <a href="/" class="btn btn-back">Back</a>
+            <button type="submit" class="btn btn-primary">Sign Up ✨</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function toggleParentField() {
+        const roleSelect = document.getElementById('role');
+        const parentFieldContainer = document.getElementById('parent-field-container');
+        const parentUsernameInput = document.getElementById('parent_username');
+
+        if (roleSelect.value === 'child') {
+            parentFieldContainer.classList.remove('hidden');
+            parentUsernameInput.setAttribute('required', 'required');
+        } else {
+            parentFieldContainer.classList.add('hidden');
+            parentUsernameInput.removeAttribute('required');
+            parentUsernameInput.value = ''; // clear value if switched back
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Dashboard - Lunar Logic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 480px;
+            background: #0284c7; /* Bright friendly sky blue */
+            color: white;
+            padding: 18px;
+            border-radius: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            box-sizing: border-box;
+            border: 4px solid #bae6fd;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #0284c7;
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .points-badge {
+            background: #fde047; /* Bright Star Yellow */
+            color: #854d0e;
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(253, 224, 71, 0.4);
+        }
+
+        .tasks-heading {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            color: #475569;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        .task-form {
+            background-color: #f8fafc;
+            padding: 16px 18px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            text-align: left;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .task-form:hover {
+            border-color: #0284c7;
+            background-color: #f0fdf4;
+        }
+
+        .task-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-icon {
+            font-size: 22px;
+        }
+
+        .task-details strong {
+            font-family: 'Fredoka', sans-serif;
+            color: #1e293b;
+            font-size: 16px;
+            display: block;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        select {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: #fff;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .btn-save:hover {
+            background: #059669;
+            transform: translateY(-1px);
+        }
+
+        .no-tasks {
+            font-size: 15px;
+            color: #64748b;
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 14px;
+            border: 2px dashed #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .container { padding: 20px; border-radius: 16px; border-width: 2px; }
+            .header { font-size: 22px; padding: 14px; margin-top: 10px; }
+            .task-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .task-actions { width: 100%; justify-content: space-between; }
+            select { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">🚀 Lunar Logic</div>
+
+<div class="container">
+    <h2>Welcome back, {{ child_name }}! 👋</h2>
+
+    <div class="points-badge">
+        ⭐ Stellar Points: {{ points }}
+    </div>
+
+    <div class="tasks-heading">Your Space Missions (Tasks):</div>
+
+    {% if tasks %}
+        {% for task in tasks %}
+            <form action="/update-task-status" method="POST" class="task-form">
+                <input type="hidden" name="child_username" value="{{ child_name }}">
+                <input type="hidden" name="task_name" value="{{ task.name }}">
+                
+                <div class="task-top">
+                    <div class="task-info">
+                        <span class="task-icon">🪐</span>
+                        <div class="task-details">
+                            <strong>{{ task.name }}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="task-actions">
+                        <select name="status">
+                            <option value="in-progress" {% if not task.completed %}selected{% endif %}>In-Progress</option>
+                            <option value="complete" {% if task.completed %}selected{% endif %}>Complete</option>
+                        </select>
+                        <button type="submit" class="btn-save">Save</button>
+                    </div>
+                </div>
+            </form>
+        {% endfor %}
+    {% else %}
+        <div class="no-tasks">
+            🌌 No space missions assigned yet! Check back soon, explorer.
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Missions - Lunar Logic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 650px;
+            background: #0284c7; /* Bright friendly sky blue */
+            color: white;
+            padding: 18px;
+            border-radius: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            box-sizing: border-box;
+            border: 4px solid #bae6fd;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #0284c7;
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Table Design */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 14px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        th { 
+            background: #f8fafc;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            color: #0284c7;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f1f5f9;
+        }
+
+        .no-tasks {
+            font-size: 15px;
+            color: #64748b;
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 14px;
+            border: 2px dashed #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        .btn-primary {
+            background: #10b981; /* Cheerful Mint Green */
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: #0ea5e9; /* Sky Blue */
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-back {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .btn-back:hover {
+            background: #cbd5e1;
+            color: #475569;
+        }
+
+        /* Mobile responsiveness adjustments */
+        @media (max-width: 540px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 16px;
+                border-width: 2px;
+            }
+
+            .header {
+                font-size: 22px;
+                padding: 14px;
+                margin-top: 10px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">🚀 Lunar Logic</div>
+
+<div class="container">
+    <h2>📋 Space Missions List</h2>
+
+    {% if tasks %}
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>✨ Mission Name</th>
+                    <th>⭐ Assigned To</th>
+                    <th>📌 Status</th>
+                </tr>
+
+                {% for task in tasks %}
+                <tr>
+                    <td><strong>{{ task.task_name }}</strong></td>
+                    <td>{{ task.assigned_to }}</td>
+                    <td>{{ task.status }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div class="no-tasks">
+            🌌 No missions created yet! Get started by adding a new one below.
+        </div>
+    {% endif %}
+
+    <div class="btn-container">
+        <a href="/create-task?username={{ parent_username }}" class="btn btn-primary">+ Create Task</a>
+        <a href="/assign-task?username={{ parent_username }}" class="btn btn-secondary">Assign Task</a>
+    </div>
+
+    <div class="btn-container" style="margin-top: 12px;">
+        <a href="/parent-dashboard?username={{ parent_username }}" class="btn btn-back">Back to Dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>

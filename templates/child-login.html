@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Login - Lunar Logic</title>
+    <!-- Import identical playful Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 450px;
+            background: #0284c7; /* Bright friendly sky blue */
+            color: white;
+            padding: 18px;
+            border-radius: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+            box-sizing: border-box;
+            border: 4px solid #bae6fd;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #0284c7;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        p {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 15px;
+            background-color: #f8fafc;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0284c7;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background: #10b981; /* Cheerful Mint Green */
+            color: white;
+            margin-top: 15px;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Mobile responsiveness adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 16px;
+                border-width: 2px;
+            }
+
+            .header {
+                font-size: 22px;
+                padding: 14px;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">🚀 Lunar Logic</div>
+
+    <div class="container">
+        <h2>Hello, Explorer! 👋</h2>
+        <p>Enter your login details to see your space missions:</p>
+
+        <form method="POST" action="/child-login">
+            <input type="text" name="username" placeholder="⭐ Child Username" required>
+            <input type="password" name="password" placeholder="🔒 Password" required>
+
+            <button class="btn" type="submit">Blast Off! 🚀</button>
+        </form>
+    </div>
+
+</body>
+</html>
