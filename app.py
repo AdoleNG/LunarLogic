@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, redirect
-from accounts import create_parent, create_child, login_parent, login_child
 from flask import Flask, render_template, request, redirect, url_for
+from accounts import create_parent, create_child, login_parent, login_child
 
 app = Flask(__name__)
 
@@ -165,46 +164,6 @@ def parent_tasks():
                            parent_username=parent_username, 
                            tasks=parent_tasks_list)
 
-    # -----------------------------------------
-    # 1. Add reusable tasks (not assigned yet)
-    # -----------------------------------------
-    for task in db["tasks"]:
-        tasks_list.append({
-            "task_name": task["name"],
-            "assigned_to": "",
-            "status": ""
-        })
-
-    # -----------------------------------------
-    # 2. Add tasks assigned to children
-    # -----------------------------------------
-    for child_username in parent["children"]:
-        child = db["children"][child_username]
-
-        for task in child["tasks"]:
-            # Determine status
-            if isinstance(task, dict):
-                status = "Completed" if task.get("completed") else "In Progress"
-                task_name = task.get("name")
-            else:
-                status = "In Progress"
-                task_name = task
-
-            tasks_list.append({
-                "task_name": task_name,
-                "assigned_to": child["name"],
-                "status": status
-            })
-
-    return render_template(
-        "parent-tasks.html",
-        parent_username=username,
-        tasks=tasks_list
-    )
-
-
-
-
 # -----------------------------
 # Assign Task Page
 # -----------------------------
@@ -246,8 +205,6 @@ def assign_task():
         tasks=db["tasks"]
     )
 
-
-
 # -----------------------------
 # Child Dashboard
 # -----------------------------
@@ -272,27 +229,29 @@ def child_dashboard():
 # -----------------------------
 # Create Task (Parent Only)
 # -----------------------------
-@app.route('/create-task', methods=['POST'])
+@app.route('/create-task', methods=['GET', 'POST'])
 def create_task():
     from accounts import db, save_db
     
     parent_username = request.args.get('username')
-    task_name = request.form.get('task_name')
-    
-    if parent_username in db["parents"]:
-        # Ensure the parent has a tasks list initialized
-        if "tasks" not in db["parents"][parent_username]:
-            db["parents"][parent_username]["tasks"] = []
-            
-        # Append the task specifying who created it
-        db["parents"][parent_username]["tasks"].append({
-            "name": task_name,
-            "created_by": parent_username,
-            "completed": False
-        })
-        save_db(db)
+
+    if request.method == 'POST':
+        task_name = request.form.get('task_name')
         
-    return redirect(url_for('parent_dashboard', username=parent_username))
+        if parent_username in db["parents"]:
+            if "tasks" not in db["parents"][parent_username]:
+                db["parents"][parent_username]["tasks"] = []
+                
+            db["parents"][parent_username]["tasks"].append({
+                "name": task_name,
+                "created_by": parent_username,
+                "completed": False
+            })
+            save_db(db)
+            
+        return redirect(url_for('parent_dashboard', username=parent_username))
+        
+    return render_template('create_task.html', parent_username=parent_username)
 
 @app.route('/update-task-status', methods=['POST'])
 def update_task_status():
@@ -304,7 +263,6 @@ def update_task_status():
     
     is_completed = True if status == 'complete' else False
     
-    # Update the task status inside the database
     if child_username in db["children"]:
         child = db["children"][child_username]
         for task in child["tasks"]:
@@ -312,14 +270,12 @@ def update_task_status():
                 task["completed"] = is_completed
                 break
             elif isinstance(task, str) and task == task_name:
-                # Convert string task format to dictionary if it wasn't one already
                 idx = child["tasks"].index(task)
                 child["tasks"][idx] = {"name": task_name, "completed": is_completed}
                 break
         save_db(db)
         
     return redirect(f'/child-dashboard?username={child_username}')
-
 
 # -----------------------------
 # Run App
