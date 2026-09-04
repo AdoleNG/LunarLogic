@@ -150,18 +150,20 @@ def parent_kids():
 # -----------------------------
 # Parent Tasks Page
 # -----------------------------
-@app.route("/parent-tasks")
+@app.route('/parent-tasks')
 def parent_tasks():
     from accounts import db
-
-    username = request.args.get("username")
-
-    if username not in db["parents"]:
-        return "Parent not found."
-
-    parent = db["parents"][username]
-
-    tasks_list = []
+    
+    parent_username = request.args.get('username')
+    parent_data = db["parents"].get(parent_username, {})
+    
+    # Filter tasks created exclusively by this parent
+    all_tasks = parent_data.get("tasks", [])
+    parent_tasks_list = [t for t in all_tasks if isinstance(t, dict) and t.get("created_by") == parent_username]
+    
+    return render_template('parent_tasks.html', 
+                           parent_username=parent_username, 
+                           tasks=parent_tasks_list)
 
     # -----------------------------------------
     # 1. Add reusable tasks (not assigned yet)
@@ -270,36 +272,27 @@ def child_dashboard():
 # -----------------------------
 # Create Task (Parent Only)
 # -----------------------------
-@app.route("/create-task", methods=["GET", "POST"])
+@app.route('/create-task', methods=['POST'])
 def create_task():
     from accounts import db, save_db
-
-    parent_username = request.args.get("username")
-
-    if parent_username is None:
-        return "Error: Parent username missing."
-
-    if request.method == "POST":
-        task_name = request.form["task_name"]
-
-        # Save reusable task
-        db["tasks"].append({
-            "name": task_name
+    
+    parent_username = request.args.get('username')
+    task_name = request.form.get('task_name')
+    
+    if parent_username in db["parents"]:
+        # Ensure the parent has a tasks list initialized
+        if "tasks" not in db["parents"][parent_username]:
+            db["parents"][parent_username]["tasks"] = []
+            
+        # Append the task specifying who created it
+        db["parents"][parent_username]["tasks"].append({
+            "name": task_name,
+            "created_by": parent_username,
+            "completed": False
         })
-
         save_db(db)
-
-        # Show success page
-        return render_template(
-            "task-success.html",
-            parent_username=parent_username,
-            task_name=task_name
-        )
-
-    return render_template(
-        "create-task.html",
-        parent_username=parent_username
-    )
+        
+    return redirect(url_for('parent_dashboard', username=parent_username))
 
 @app.route('/update-task-status', methods=['POST'])
 def update_task_status():
