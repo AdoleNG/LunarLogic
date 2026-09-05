@@ -111,6 +111,32 @@
             box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
         }
 
+        .btn-back {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            background: #e2e8f0;
+            color: #64748b;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            margin-top: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-back:hover {
+            background: #cbd5e1;
+            color: #475569;
+            transform: translateY(-2px);
+        }
+
         /* Mobile responsiveness adjustments */
         @media (max-width: 480px) {
             body {
@@ -145,6 +171,8 @@
 
             <button class="btn" type="submit">Blast Off! 🚀</button>
         </form>
+
+        <a href="/" class="btn-back">Back</a>
     </div>
 
 </body>
