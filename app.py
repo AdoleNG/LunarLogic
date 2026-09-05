@@ -256,7 +256,7 @@ def create_task():
             
         return redirect(url_for('parent_dashboard', username=parent_username))
         
-    return render_template('create_task.html', parent_username=parent_username)
+    return render_template('create-task.html', parent_username=parent_username)
 
 @app.route('/update-task-status', methods=['POST'])
 def update_task_status():
