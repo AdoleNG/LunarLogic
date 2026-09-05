@@ -166,6 +166,32 @@
             transform: translateY(-1px);
         }
 
+        .btn-back {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            background: #e2e8f0;
+            color: #64748b;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            margin-top: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-back:hover {
+            background: #cbd5e1;
+            color: #475569;
+            transform: translateY(-2px);
+        }
+
         .no-tasks {
             font-size: 15px;
             color: #64748b;
@@ -228,6 +254,8 @@
             🌌 No space missions assigned yet! Check back soon, explorer.
         </div>
     {% endif %}
+
+    <a href="/child-login" class="btn-back">Back to Login</a>
 </div>
 
 </body>
