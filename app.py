@@ -165,7 +165,7 @@ def parent_tasks():
         if isinstance(t, dict) and t.get("created_by") == parent_username:
             parent_tasks_list.append(t)
             
-    return render_template('parent_tasks.html', 
+    return render_template('parent-tasks.html', 
                            parent_username=parent_username, 
                            tasks=parent_tasks_list)
 
